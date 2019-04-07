@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        //Сейчас пишу прокурчивающийся список для сообщений. С ним пока что вылетает.
 /*
         ListView lvMessages = (ListView)findViewById(R.id.lv_messages);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, users);
