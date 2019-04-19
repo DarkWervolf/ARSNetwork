@@ -15,7 +15,7 @@ public class Post_Adapter extends FirebaseRecyclerAdapter<Post, PostViewHolder> 
     public Post_Adapter(@NonNull FirebaseRecyclerOptions<Post> options) {
         super(options);
     }
-
+    //changes
     //Put data (model) in ViewHolder (layout)
     @Override
     protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull Post model) {
