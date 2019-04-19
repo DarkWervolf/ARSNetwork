@@ -3,13 +3,15 @@ package com.example.user.arsnetwork;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.user.arsnetwork.Fragments.FeedFragment;
+import com.example.user.arsnetwork.Fragments.MessagesFragment;
+import com.example.user.arsnetwork.Fragments.NotificationsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,14 +19,14 @@ public class MainActivity extends AppCompatActivity {
     MessagesFragment messagesFragment = new MessagesFragment();
     NotificationsFragment notificationsFragment = new NotificationsFragment();
 
-
-    //String[] users = {"First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh" };
+    private RecyclerView messagesRecyclerView;
 
     private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+        //navigation select
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
@@ -56,18 +58,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //replacing main frame with feed fragment
         FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_frame, feedFragment);
         transaction.commit();
 
+        //setting up the bottom navigation menu
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        //Сейчас пишу прокурчивающийся список для сообщений. С ним пока что вылетает.
-/*
-        ListView lvMessages = (ListView)findViewById(R.id.lv_messages);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, users);
-        lvMessages.setAdapter(adapter);
-        adapter.notifyDataSetChanged();*/
+
+
     }
 
 }
