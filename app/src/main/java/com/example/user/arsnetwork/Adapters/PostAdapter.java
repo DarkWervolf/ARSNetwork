@@ -11,11 +11,11 @@ import com.example.user.arsnetwork.ViewHolders.PostViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-public class Post_Adapter extends FirebaseRecyclerAdapter<Post, PostViewHolder>  {
-    public Post_Adapter(@NonNull FirebaseRecyclerOptions<Post> options) {
+public class PostAdapter extends FirebaseRecyclerAdapter<Post, PostViewHolder>  {
+    public PostAdapter(@NonNull FirebaseRecyclerOptions<Post> options) {
         super(options);
     }
-    //changes
+
     //Put data (model) in ViewHolder (layout)
     @Override
     protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull Post model) {
