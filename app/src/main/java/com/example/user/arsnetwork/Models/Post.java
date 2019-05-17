@@ -1,7 +1,7 @@
 package com.example.user.arsnetwork.Models;
 
 public class Post {
-    String link;
+    String key;
     String title;
     String text;
     String authors;
@@ -12,15 +12,15 @@ public class Post {
     }
 
     public Post(String link, String title, String text, String authors, int likes_counter) {
-        this.link = link;
+        this.key = link;
         this.title = title;
         this.text = text;
         this.authors = authors;
         this.likes_counter = likes_counter;
     }
 
-    public String getLink() {
-        return link;
+    public String getkey() {
+        return key;
     }
 
     public String getTitle() {
@@ -39,8 +39,8 @@ public class Post {
         return likes_counter;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setkey(String link) {
+        this.key = key;
     }
 
     public void setTitle(String title) {
@@ -62,7 +62,7 @@ public class Post {
     @Override
     public String toString() {
         return "Post{" +
-                "link='" + link + '\'' +
+                "key='" + key + '\'' +
                 ", title='" + title + '\'' +
                 ", text='" + text + '\'' +
                 ", authors='" + authors + '\'' +

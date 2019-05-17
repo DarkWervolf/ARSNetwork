@@ -3,21 +3,40 @@ package com.example.user.arsnetwork;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
+import com.example.user.arsnetwork.Adapters.PostAdapter;
+import com.example.user.arsnetwork.Fragments.AddNewPostFragment;
 import com.example.user.arsnetwork.Fragments.FeedFragment;
 import com.example.user.arsnetwork.Fragments.MessagesFragment;
 import com.example.user.arsnetwork.Fragments.NotificationsFragment;
+import com.example.user.arsnetwork.Models.Post;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class MainActivity extends AppCompatActivity {
 
     FeedFragment feedFragment = new FeedFragment();
     MessagesFragment messagesFragment = new MessagesFragment();
     NotificationsFragment notificationsFragment = new NotificationsFragment();
+    AddNewPostFragment addNewPostFragment = new AddNewPostFragment();
+
+    FloatingActionButton addnewpostbutton;
+
+    private PostAdapter adapter;
+    protected static final Query sChatQuery =
+            FirebaseDatabase.getInstance()
+                    .getReference()
+                    .child("posts")
+                    .limitToLast(50);
 
     private RecyclerView messagesRecyclerView;
 
@@ -67,7 +86,25 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        RecyclerView recyclerView = findViewById(R.id.feed_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                .setQuery(sChatQuery, Post.class)
+                .build();
+
+        adapter = new PostAdapter(options);
+        recyclerView.setAdapter(adapter);
+
+        addnewpostbutton = (FloatingActionButton) findViewById(R.id.addnewpostbutton);
+        addnewpostbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction1 =  getSupportFragmentManager().beginTransaction();
+                transaction1.replace(R.id.main_frame, addNewPostFragment);
+                transaction1.commit();
+            }
+        });
     }
 
 }
